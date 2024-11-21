@@ -28,7 +28,7 @@ class Bafici:
 
     def obtener_peliculas(self):
         c = self.cursor()
-        c.execute("CALL ObtenerPeliculas()")
+        c.execute("CALL ObtenerPeliculasConDirector()")
         return c.fetchall()
 
     def obtener_peliculas_por_año(self, año):

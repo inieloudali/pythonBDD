@@ -20,7 +20,7 @@ bafici = Bafici(conexion1)
 def cargar_datos(tabla, datos):
     tabla.delete(*tabla.get_children())  # Limpiar la tabla
     for row in datos:
-        tabla.insert("", "end", values=row)
+        tabla.insert("", "end", values=(row[0], row[1], row[2], row[9]))
 
 
 # Función para exportar datos a CSV
@@ -56,7 +56,7 @@ def filtrar_peliculas():
         if id_pelicula:
             datos = [row for row in datos if str(row[0]) == id_pelicula]
         if director:
-            datos = [row for row in datos if director.lower() in row[3].lower()]
+            datos = [row for row in datos if director.lower() in row[9].lower()]
         if anio:
             datos = [row for row in datos if str(row[2]) == anio]
 
@@ -135,6 +135,10 @@ tabla_frame = tk.Frame(ventana)
 tabla_frame.pack(pady=10, fill="both", expand=True)
 
 tabla_peliculas = ttk.Treeview(tabla_frame, columns=("ID", "Nombre", "Año", "Director"), show="headings")
+tabla_peliculas.column("ID", width=20)
+tabla_peliculas.column("Nombre", width=300)
+tabla_peliculas.column("Año", width=30)
+tabla_peliculas.column("Director", width=300)
 tabla_peliculas.heading("ID", text="ID")
 tabla_peliculas.heading("Nombre", text="Nombre")
 tabla_peliculas.heading("Año", text="Año")

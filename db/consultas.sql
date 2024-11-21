@@ -20,6 +20,17 @@ DELIMITER ;
 
 -- CALL ObtenerPeliculas();
 
+DELIMITER //
+	DROP PROCEDURE IF EXISTS ObtenerPeliculasConDirector//
+	CREATE PROCEDURE ObtenerPeliculasConDirector()
+    BEGIN
+		SELECT Peliculas.*, Directores.nombre AS "nombre_director"
+		FROM Peliculas
+		INNER JOIN Directores on Peliculas.ID_director = Directores.id;
+	END//
+DELIMITER ;
+
+-- CALL ObtenerPeliculasConDirector();
 
 DELIMITER //
     DROP PROCEDURE IF EXISTS ObtenerPeliculasPorAño//
