@@ -5,6 +5,7 @@ from bafici import Bafici
 import csv  # Para manejar la exportación a CSV
 
 # Conexión a la base de datos
+HOST_ESCUELA = "10.1.5.205"
 HOST_AFUERA = "181.47.29.35"
 
 conexion1 = mysql.connector.connect(
