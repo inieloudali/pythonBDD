@@ -92,5 +92,5 @@ _Para desplegar el proyecto en otro entorno, asegurate de:_
 
 * **Juan Lucas Casanova** - [Juan-Lucas07] (https://github.com/Juan-Lucas07)
 * **Ivan Nieloud** - [inieloudali] (https://github.com/inieloudali)
-* **Martina Sandri** - [Tu GitHub] (https://github.com/tuusuario)
+* **Martina Sandri** - [SandriMartina] (https://github.com/SandriMartina)
 * **Francisco Pica** - [franpicc5] (https://github.com/franpicc5)
