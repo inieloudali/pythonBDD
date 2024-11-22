@@ -90,7 +90,7 @@ _Para desplegar el proyecto en otro entorno, asegurate de:_
 
 ## Autores ✒️
 
-* **Juan Lucas Casanova** - [Juan-Lucas07](https://github.com/Juan-Lucas07)
+* **Juan Lucas Casanova** - [Juan-Lucas07] (https://github.com/Juan-Lucas07)
 * **Ivan Nieloud** - [inieloudali] (https://github.com/inieloudali)
-* **Martina Sandri** - [Tu GitHub](https://github.com/tuusuario)
-* **Francisco Pica** - [Tu GitHub](https://github.com/tuusuario)
+* **Martina Sandri** - [Tu GitHub] (https://github.com/tuusuario)
+* **Francisco Pica** - [franpicc5] (https://github.com/franpicc5)
