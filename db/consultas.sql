@@ -21,6 +21,18 @@ DELIMITER ;
 -- CALL ObtenerPeliculas();
 
 DELIMITER //
+	DROP PROCEDURE IF EXISTS ObtenerPelicula//
+	CREATE PROCEDURE ObtenerPelicula(id INTEGER)
+    BEGIN
+		SELECT *
+		FROM Peliculas
+		WHERE Peliculas.id = id;
+	END//
+DELIMITER ;
+
+-- CALL ObtenerPelicula();
+
+DELIMITER //
 	DROP PROCEDURE IF EXISTS ObtenerPeliculasConDirector//
 	CREATE PROCEDURE ObtenerPeliculasConDirector()
     BEGIN

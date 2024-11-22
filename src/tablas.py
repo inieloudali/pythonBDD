@@ -16,7 +16,7 @@ class Director():
         return f"El director {self.nombre} participo en el BAFICI de 2010. {self.biografia}. {self.archivo_foto}"
 
 class Pelicula():
-    def __init__(self, id, titulo, año, sinopsis, duracion, cast, prodteam, publicado, director):
+    def __init__(self, id, titulo, año, sinopsis, duracion, cast, prodteam, publicado, director = None):
         self.__id=id
         self.titulo=titulo
         self.año=año

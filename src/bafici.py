@@ -14,12 +14,25 @@ class Bafici:
         query = f"UPDATE {tabla} SET {campo} = %s WHERE id = %s"
         c = self.cursor()
         c.execute(query, (nuevo_valor, id))
+        self.__conexion.commit()
+        
+    # Función para actualizar una Película
+    def guardar_pelicula(self, pelicula):
+        query = """
+          UPDATE Peliculas
+          SET titulo = %s, año = %s, duracion = %s
+          WHERE id = %s
+        """
+        c = self.cursor()
+        c.execute(query, (pelicula.titulo, pelicula.año, pelicula.duracion, pelicula.get_id(), ))
+        self.__conexion.commit()
 
     # Función para eliminar registros
     def eliminar_registro(self, tabla, id):
         query = f"DELETE FROM {tabla} WHERE id = %s"
         c = self.cursor()
         c.execute(query, (id,))
+        self.__conexion.commit()
 
     # #############################################################
     # Funciones para consultas
@@ -27,6 +40,12 @@ class Bafici:
         c = self.cursor()
         c.execute("CALL ObtenerDirectores()")
         return c.fetchall()
+
+    def obtener_pelicula(self, id):
+        c = self.cursor()
+        c.execute("CALL ObtenerPelicula(%s)", (id,))
+        row = c.fetchone()
+        return Pelicula(row[0], row[1], row[2], row[4], row[5], row[6], row[7], row[8])
 
     def obtener_peliculas(self):
         c = self.cursor()

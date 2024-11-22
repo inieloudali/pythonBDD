@@ -76,32 +76,67 @@ def editar_registro():
     if not seleccionado:
         messagebox.showwarning("Editar", "Selecciona un registro para editar.")
         return
-    valores = tabla_peliculas.item(seleccionado, "values")
-    if valores:
-        top = tk.Toplevel()
-        top.title("Editar registro")
-        top.geometry("400x300")
-        campos = ["ID", "Nombre", "Año", "Director"]
-        entradas = {}
-        for i, campo in enumerate(campos):
-            tk.Label(top, text=campo).grid(row=i, column=0, padx=10, pady=5)
-            entrada = tk.Entry(top)
-            entrada.insert(0, valores[i])
-            entrada.grid(row=i, column=1, padx=10, pady=5)
-            entradas[campo] = entrada
+    id_pelicula = int(tabla_peliculas.item(seleccionado, "values")[0])
+    pelicula = bafici.obtener_pelicula(id_pelicula)
+    # print(pelicula.describir_pelicula())
+    
+    top = tk.Toplevel()
+    top.title("Editar registro")
+    top.geometry("400x300")
+    fila = 0
 
-        def guardar_cambios():
-            try:
-                nuevo_valor = [entradas[campo].get() for campo in campos]
-                bafici.actualizar_registro("Peliculas", nuevo_valor[1], int(nuevo_valor[0]))
-                cargar_datos(tabla_peliculas, bafici.obtener_peliculas())
-                messagebox.showinfo("Editar", "Registro actualizado correctamente.")
-                top.destroy()
-            except Exception as e:
-                messagebox.showerror("Error", f"No se pudo actualizar el registro: {e}")
+    # ID
+    tk.Label(top, text="Id").grid(row=fila, column=0, padx=10, pady=5)
+    tk.Label(top, text=str(pelicula.get_id())).grid(row=fila, column=1, padx=10, pady=5)
+    fila += 1
 
-        tk.Button(top, text="Guardar", command=guardar_cambios).grid(row=len(campos), columnspan=2, pady=10)
+    def agrega_campo(label, dato, fila):
+        tk.Label(top, text=label).grid(row=fila, column=0, padx=10, pady=5)
+        campo = tk.Entry(top)
+        campo.insert(0, dato)
+        campo.grid(row=fila, column=1, padx=10, pady=5)
+        return campo
 
+    campo_titulo = agrega_campo("Titulo", pelicula.titulo, fila)
+    fila += 1
+    campo_año = agrega_campo("Año", pelicula.año, fila)
+    fila += 1
+    campo_duracion = agrega_campo("Duración", pelicula.duracion, fila)
+    fila += 1
+
+    def guardar_cambios():
+        try:
+            pelicula.titulo = campo_titulo.get()
+            pelicula.año = int(campo_año.get())
+            pelicula.duracion = int(campo_duracion.get())
+            bafici.guardar_pelicula(pelicula)
+            cargar_datos(tabla_peliculas, bafici.obtener_peliculas())
+            top.destroy()
+            messagebox.showinfo("Editar", "Registro actualizado correctamente.")
+        except Exception as e:
+            messagebox.showerror("Error", f"No se pudo actualizar el registro: {e}")
+
+    tk.Button(top, text="Guardar", command=guardar_cambios).grid(row=fila, columnspan=2, pady=10)
+
+def eliminar_registro():
+    seleccionado = tabla_peliculas.focus()
+    if not seleccionado:
+        messagebox.showwarning("Eliminar", "Selecciona un registro para eliminar.")
+        return
+    id_pelicula = int(tabla_peliculas.item(seleccionado, "values")[0])
+    titulo = tabla_peliculas.item(seleccionado, "values")[1]
+
+    # Mostrar diálogo de confirmación
+    confirmar = messagebox.askyesno("Confirmar eliminación", f"¿Estás seguro de que deseas eliminar la película {titulo}?")
+    if not confirmar:
+        return
+
+    try:
+        bafici.eliminar_registro("Peliculas", id_pelicula)
+        cargar_datos(tabla_peliculas, bafici.obtener_peliculas())
+        messagebox.showinfo("Eliminar", "Registro eliminado correctamente.")
+    except Exception as e:
+        messagebox.showerror("Error", f"No se pudo eliminar el registro: {e}")
 
 # Configuración de la ventana principal
 ventana = tk.Tk()
@@ -155,6 +190,7 @@ acciones_frame = tk.Frame(ventana)
 acciones_frame.pack(pady=10, fill="x")
 
 tk.Button(acciones_frame, text="Editar", command=editar_registro).pack(side="left", padx=5)
+tk.Button(acciones_frame, text="Eliminar", command=eliminar_registro).pack(side="left", padx=5)
 tk.Button(acciones_frame, text="Exportar a CSV", command=lambda: exportar_a_csv(tabla_peliculas.get_children())).pack(side="left", padx=5)
 
 # Cargar datos iniciales
