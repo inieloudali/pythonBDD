@@ -40,6 +40,7 @@ _Seguí estos pasos para configurar el entorno de desarrollo:_
    - En el archivo principal, ajustá los parámetros de conexión a la base de datos:
      ```python
      HOST_AFUERA = "181.47.29.35"
+     HOST_ESCUELA = "10.1.5.205"
      conexion1 = mysql.connector.connect(
         host=HOST_AFUERA,
         user="2024-4INF-Grupo05",
