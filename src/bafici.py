@@ -1,3 +1,5 @@
+from tablas import Director, Pelicula
+
 class Bafici:
     def __init__(self, conexion):
         self.__conexion = conexion
@@ -29,7 +31,12 @@ class Bafici:
     def obtener_peliculas(self):
         c = self.cursor()
         c.execute("CALL ObtenerPeliculasConDirector()")
-        return c.fetchall()
+        peliculas = []
+        for row in c.fetchall():
+            director = Director(row[9], row[10], row[11], row[12], row[13])
+            pelicula = Pelicula(row[0], row[1], row[2], row[4], row[5], row[6], row[7], row[8], director)
+            peliculas.append(pelicula)
+        return peliculas
 
     def obtener_peliculas_por_año(self, año):
         c = self.cursor()

@@ -24,7 +24,13 @@ DELIMITER //
 	DROP PROCEDURE IF EXISTS ObtenerPeliculasConDirector//
 	CREATE PROCEDURE ObtenerPeliculasConDirector()
     BEGIN
-		SELECT Peliculas.*, Directores.nombre AS "nombre_director"
+		SELECT
+		  Peliculas.*,
+		  Directores.id AS "id_director",
+		  Directores.nombre AS "nombre_director",
+		  Directores.biografia AS "biografia_director",
+		  Directores.fue_publicada AS "fue_publicada_director",
+		  Directores.archivo_foto AS "archivo_foto_director"
 		FROM Peliculas
 		INNER JOIN Directores on Peliculas.ID_director = Directores.id;
 	END//

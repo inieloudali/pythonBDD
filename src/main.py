@@ -17,10 +17,10 @@ bafici = Bafici(conexion1)
 
 
 # Función para cargar datos en la tabla
-def cargar_datos(tabla, datos):
+def cargar_datos(tabla, peliculas):
     tabla.delete(*tabla.get_children())  # Limpiar la tabla
-    for row in datos:
-        tabla.insert("", "end", values=(row[0], row[1], row[2], row[9]))
+    for pelicula in peliculas:
+        tabla.insert("", "end", values=(pelicula.get_id(), pelicula.titulo, pelicula.año, pelicula.director.nombre))
 
 
 # Función para exportar datos a CSV
@@ -48,20 +48,20 @@ def filtrar_peliculas():
     anio = filtro_anio.get().strip()
 
     try:
-        datos = bafici.obtener_peliculas()
+        peliculas = bafici.obtener_peliculas()
 
         # Aplicar filtros uno por uno
         if titulo:
-            datos = [row for row in datos if titulo.lower() in row[1].lower()]
+            peliculas = [peli for peli in peliculas if titulo.lower() in peli.titulo.lower()]
         if id_pelicula:
-            datos = [row for row in datos if str(row[0]) == id_pelicula]
+            peliculas = [peli for peli in peliculas if peli.get_id() == int(id_pelicula)]
         if director:
-            datos = [row for row in datos if director.lower() in row[9].lower()]
+            peliculas = [peli for peli in peliculas if director.lower() in peli.director.nombre.lower()]
         if anio:
-            datos = [row for row in datos if str(row[2]) == anio]
+            peliculas = [peli for peli in peliculas if peli.año == int(anio)]
 
-        if datos:
-            cargar_datos(tabla_peliculas, datos)
+        if peliculas:
+            cargar_datos(tabla_peliculas, peliculas)
         else:
             messagebox.showwarning("Filtro", "No se encontraron resultados. Mostrando todas las películas.")
             cargar_datos(tabla_peliculas, bafici.obtener_peliculas())
@@ -161,4 +161,5 @@ tk.Button(acciones_frame, text="Exportar a CSV", command=lambda: exportar_a_csv(
 cargar_datos(tabla_peliculas, bafici.obtener_peliculas())
 
 ventana.mainloop()
+
 conexion1.close()
