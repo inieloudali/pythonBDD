@@ -1,43 +1,95 @@
-# Sistema de Gestión de Películas - BAFICI
+# Gestión de Películas - BAFICI
 
-Este proyecto es una aplicación de escritorio desarrollada con Python y Tkinter para gestionar registros de películas y directores asociados al festival BAFICI. Incluye funcionalidades para listar, filtrar, editar, eliminar registros y exportar datos a CSV.
+_Este proyecto es una interfaz gráfica desarrollada con Python y Tkinter que permite gestionar un sistema de películas conectadas a una base de datos. Los usuarios pueden hacer búsquedas, editar registros, exportar datos y más._
 
-## Estructura del Proyecto
+## Comenzando 🚀
 
-El repositorio contiene los siguientes archivos principales:
+_Estas instrucciones te van a permitir obtener una copia del proyecto en funcionamiento en tu computadora._
 
-1. **main.py**  
-   Archivo principal que configura la interfaz gráfica y las funcionalidades principales del sistema, como cargar datos, filtrar películas, editar y eliminar registros. Utiliza la clase `Bafici` para interactuar con la base de datos.
+Mirá **Despliegue** para conocer cómo desplegar el proyecto.
 
-2. **bafici.py**  
-   Define la clase `Bafici`, que abstrae la interacción con la base de datos mediante consultas y procedimientos almacenados. Incluye métodos para:
-   - Obtener, actualizar y eliminar registros.
-   - Ejecutar procedimientos almacenados para obtener datos específicos (por ejemplo, películas por año, promedio de duración, etc.).
+### Pre-requisitos 📋
 
-3. **tablas.py**  
-   Contiene las definiciones de las clases `Director` y `Pelicula`, que representan las entidades del sistema. Estas clases encapsulan la lógica básica y los datos relacionados con directores y películas.
+_Necesitás instalar las siguientes herramientas:_
 
-## Funcionalidades
+- **Python 3.x**
+  ```
+  Desde https://www.python.org/
+  ```
+- **MySQL Server** (para la base de datos)
+  ```
+  Configurá tu servidor MySQL y creá la base de datos requerida.
+  ```
+- **Librerías Python**
+  ```
+  Instalá las dependencias usando pip:
+  pip install mysql-connector-python
+  ```
 
-### Gestión de Películas
-- Listar todas las películas con sus directores asociados.
-- Filtrar películas por título, ID, director y año.
-- Editar registros existentes.
-- Eliminar películas con confirmación previa.
+### Instalación 🔧
 
-### Exportación de Datos
-- Exportar la lista de películas mostradas en pantalla a un archivo CSV.
+_Seguí estos pasos para configurar el entorno de desarrollo:_
 
-### Gestión de Directores
-- Obtener y listar directores desde la base de datos.
+1. Cloná el repositorio:
+   ```
+   git clone https://github.com/inieloudali/pythonBDD.git
+   cd pythonBDD.git
+   ```
 
-### Interacciones con la Base de Datos
-- Uso de procedimientos almacenados para operaciones complejas.
-- Actualización y eliminación de registros en las tablas de la base de datos.
+2. Configurá la conexión a la base de datos:
+   - En el archivo principal, ajustá los parámetros de conexión a la base de datos:
+     ```python
+     HOST_AFUERA = "181.47.29.35"
+     conexion1 = mysql.connector.connect(
+        host=HOST_AFUERA,
+        user="2024-4INF-Grupo05",
+        passwd="basedepatos",
+        database="2024-4INF-Grupo05"
+     )
+     ```
 
-## Uso
-- Cargar Películas: Las películas se cargan automáticamente al iniciar la aplicación.
-- Filtrar Registros: Completa los campos de filtro y haz clic en "Buscar" para aplicar filtros.
-- Editar Película: Selecciona una película y haz clic en "Editar" para modificar su información.
-- Eliminar Película: Selecciona una película y haz clic en "Eliminar". Confirma la eliminación en el cuadro de diálogo.
-- Exportar a CSV: Haz clic en "Exportar a CSV" para guardar los datos en un archivo.
+3. Ejecutá la aplicación:
+   ```
+   python main.py
+   ```
+
+
+## Ejecutando las pruebas ⚙️
+
+_Para probar el sistema, podés seguir estos pasos:_
+
+### Analizá las pruebas end-to-end 🔩
+
+_Ejecutá pruebas básicas para verificar funcionalidades principales como búsqueda, edición y exportación._
+
+1. Filtrá una película por título desde la interfaz.
+2. Editá un registro existente y verificá los cambios en la base de datos.
+3. Exportá los datos y confirmá que se genera un archivo CSV válido.
+
+```
+Prueba 1:
+Buscar "el juramento" -> Verificar que la tabla muestra los datos correctos.
+Prueba 2:
+Editar el año de una película -> Guardar y confirmar en la base de datos.
+```
+
+## Despliegue 📦
+
+_Para desplegar el proyecto en otro entorno, asegurate de:_
+
+1. Configurar la base de datos en el servidor de producción.
+2. Ajustar los parámetros de conexión en el código fuente.
+3. Instalar las dependencias necesarias.
+
+## Construido con 🛠️
+
+* [Python](https://www.python.org/) - Lenguaje de programación
+* [Tkinter](https://docs.python.org/3/library/tkinter.html) - Interfaz gráfica
+* [MySQL](https://www.mysql.com/) - Base de datos
+
+## Autores ✒️
+
+* **Juan Lucas Casanova** - [Juan-Lucas07](https://github.com/Juan-Lucas07)
+* **Ivan Nieloud** - [inieloudali] (https://github.com/inieloudali)
+* **Martina Sandri** - [Tu GitHub](https://github.com/tuusuario)
+* **Francisco Pica** - [Tu GitHub](https://github.com/tuusuario)
